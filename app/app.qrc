@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>image/connect.png</file>
+        <file>image/device.png</file>
+        <file>image/hb_off.png</file>
+        <file>image/hb_on.png</file>
+        <file>image/lislinker.png</file>
+        <file>image/log.png</file>
+        <file>image/open.png</file>
+        <file>image/pause.png</file>
+        <file>image/quit.png</file>
+        <file>image/start.png</file>
+        <file>image/version.png</file>
+    </qresource>
+</RCC>
