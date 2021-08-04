@@ -11,12 +11,15 @@ EdanWorker::EdanWorker(QObject *parent) : QObject(parent)
 
     connect(this, &EdanWorker::initNet, mNetWorker.get(), &NetServer::netInit);
     connect(mNetWorker.get(), &NetServer::updateNetDataFrame, this, &EdanWorker::parseData);
+    connect(this, &EdanWorker::sendAck, mNetWorker.get(), &NetServer::rspAck);
 
     mThread->start();
 }
 
 void EdanWorker::parseData(const QByteArray &data)
 {
+    QString ackFormat = "MSH|^~\\&|EDAN|i15|LIS||20130929174802||ACK^R01||P|2.4||||0|| UNICODE UTF-8|||\r\nMSA|AA||Message accepted\r\n";
+
     QStringList list = QString(data).split(QRegExp("[\r\n]"), QString::SkipEmptyParts);
 
     QJsonArray result_arry;
@@ -29,6 +32,8 @@ void EdanWorker::parseData(const QByteArray &data)
             jsonInsert(result_arry, itemList.at(4), itemList.at(6), itemList.at(5), itemList.at(7));
         }
     }
+
+    emit sendAck(ackFormat);
 
     QJsonObject root_Obj;
     root_Obj.insert("results", result_arry);

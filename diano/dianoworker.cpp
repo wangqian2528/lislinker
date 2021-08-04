@@ -31,10 +31,10 @@ void DianoWorker::parseData(const QByteArray &data)
 
     QJsonObject root_Obj;
     root_Obj.insert("name", name);
-    root_Obj.insert("valueLeft", valueLeft.toInt());
-    root_Obj.insert("valueRight", valueRight.toInt());
-    root_Obj.insert("refLeft", refLeft.toInt());
-    root_Obj.insert("refRight", refRight.toInt());
+    root_Obj.insert("valueLeft", valueLeft.toFloat());
+    root_Obj.insert("valueRight", valueRight.toFloat());
+    root_Obj.insert("refLeft", refLeft.toFloat());
+    root_Obj.insert("refRight", refRight.toFloat());
     root_Obj.insert("micValue", micValue);
     root_Obj.insert("unit", unit);
     root_Obj.insert("result", result);

@@ -43,8 +43,9 @@ QString Config::POCHComPort = "";               //串口号
 //[DIANO]
 bool Config::DIANOEnabled = false;               //配置使能
 QString Config::DIANOComPort = "";               //串口号
+int Config::DIANOComBaud = 9600;                 //波特率
 
-//[DIANO]
+//[EDAN]
 bool Config::EDANEnabled = false;                //配置使能
 int Config::EDANPort = 0;                        //端口号
 
@@ -124,6 +125,7 @@ void Config::readConfig()
     set.beginGroup("DIANO");
     Config::DIANOEnabled = set.value("Enabled", Config::DIANOEnabled).toBool();
     Config::DIANOComPort = set.value("ComPort", Config::DIANOComPort).toString();
+    Config::DIANOComBaud = set.value("ComBaud", Config::DIANOComBaud).toInt();
     set.endGroup();
 
     //[EDAN]
@@ -191,6 +193,7 @@ void Config::writeConfig()
     set.beginGroup("DIANO");
     set.setValue("Enabled", Config::DIANOEnabled);
     set.setValue("ComPort", Config::DIANOComPort);
+    set.setValue("ComBaud", Config::DIANOComBaud);
     set.endGroup();
 
     //[EDAN]

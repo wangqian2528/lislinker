@@ -9,6 +9,7 @@ QString Config::ConfigFile = "config.ini";
 //[DIANO]
 bool Config::DIANOEnabled = false;               //配置使能
 QString Config::DIANOComPort = "";               //串口号
+int Config::DIANOComBaud = 9600;                 //波特率
 
 void Config::readConfig()
 {
@@ -18,5 +19,6 @@ void Config::readConfig()
     set.beginGroup("DIANO");
     Config::DIANOEnabled = set.value("Enabled", Config::DIANOEnabled).toBool();
     Config::DIANOComPort = set.value("ComPort", Config::DIANOComPort).toString();
+    Config::DIANOComBaud = set.value("ComBaud", Config::DIANOComBaud).toInt();
     set.endGroup();
 }

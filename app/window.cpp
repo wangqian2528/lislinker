@@ -177,13 +177,15 @@ void Window::initDevicePage()
     ui->gb_diano->setChecked(Config::DIANOEnabled);
     ui->cbx_diano->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->cbx_diano->addItems(getAllComPortName());
-    ui->cbx_diano->setCurrentIndex(ui->cbx_vb1->findText(Config::DIANOComPort));
+    ui->cbx_diano->setCurrentIndex(ui->cbx_diano->findText(Config::DIANOComPort));
     ui->cbx_diano->installEventFilter(this);
+    ui->cbx_diano_baud->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->cbx_diano_baud->setCurrentIndex(ui->cbx_diano_baud->findText(QString::number(Config::DIANOComBaud)));
 
     //EDAN
-    ui->gb_edan->setChecked(Config::V200Enabled);
+    ui->gb_edan->setChecked(Config::EDANEnabled);
     ui->le_edan_port->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
-    ui->le_edan_port->setText(QString("%1").arg(Config::V200Port));
+    ui->le_edan_port->setText(QString("%1").arg(Config::EDANPort));
 }
 
 bool Window::eventFilter(QObject *obj, QEvent *event)
@@ -358,6 +360,11 @@ void Window::on_cbx_diano_activated(const QString &arg1)
     Config::DIANOComPort = arg1;
 }
 
+void Window::on_cbx_diano_baud_currentIndexChanged(const QString &arg1)
+{
+    Config::DIANOComBaud = arg1.toInt();
+}
+
 void Window::on_gb_edan_toggled(bool arg1)
 {
     Config::EDANEnabled = arg1;
@@ -455,5 +462,3 @@ void Window::readUdpData()
     while (udp->hasPendingDatagrams());
     ui->tb_log->append(QString("[%1]:%2").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd_HH:mm:ss")).arg(udpdata));
 }
-
-

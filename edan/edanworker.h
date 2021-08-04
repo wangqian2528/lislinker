@@ -25,6 +25,7 @@ public:
 
 signals:
     void initNet(int portName);
+    void sendAck(const QString &ack);
 
 private slots:
     void parseData(const QByteArray &data);

@@ -30,7 +30,7 @@
     <item row="0" column="0">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tab_connect">
        <attribute name="title">
@@ -271,9 +271,9 @@
            <property name="geometry">
             <rect>
              <x>0</x>
-             <y>0</y>
+             <y>-313</y>
              <width>494</width>
-             <height>1097</height>
+             <height>1129</height>
             </rect>
            </property>
            <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -666,7 +666,7 @@
               <property name="checkable">
                <bool>true</bool>
               </property>
-              <layout class="QVBoxLayout" name="verticalLayout_14">
+              <layout class="QVBoxLayout" name="verticalLayout_11">
                <item>
                 <spacer name="verticalSpacer_29">
                  <property name="orientation">
@@ -690,7 +690,7 @@
                    <item>
                     <widget class="QLabel" name="label_18">
                      <property name="text">
-                      <string>串口：</string>
+                      <string>串口：   </string>
                      </property>
                     </widget>
                    </item>
@@ -708,6 +708,84 @@
                  </item>
                  <item>
                   <spacer name="horizontalSpacer_22">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                </layout>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="horizontalLayout_35">
+                 <item>
+                  <layout class="QHBoxLayout" name="horizontalLayout_36">
+                   <item>
+                    <widget class="QLabel" name="label_20">
+                     <property name="text">
+                      <string>波特率：</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QComboBox" name="cbx_diano_baud">
+                     <property name="minimumSize">
+                      <size>
+                       <width>120</width>
+                       <height>0</height>
+                      </size>
+                     </property>
+                     <item>
+                      <property name="text">
+                       <string>1200</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>2400</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>4800</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>9600</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>19200</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>38400</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>57600</string>
+                      </property>
+                     </item>
+                     <item>
+                      <property name="text">
+                       <string>115200</string>
+                      </property>
+                     </item>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item>
+                  <spacer name="horizontalSpacer_24">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>

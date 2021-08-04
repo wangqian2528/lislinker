@@ -21,6 +21,7 @@ public:
 
 public slots:
     void netInit(int portName);
+    void rspAck(const QString &rsp);
 
 signals:
     void updateNetDataFrame(const QByteArray &data);
@@ -31,10 +32,11 @@ protected:
 private slots:
     void readReady();
     void newConnect();
+    void disConnect();
 
 private:
     unique_ptr<QTcpServer> mTcpServer = nullptr;
-    QTcpSocket *mTcpSocket;
+    unique_ptr<QTcpSocket> mTcpSocket = nullptr;
     QByteArray mReceivedData;
     int mCountTimerID = 0;
 };

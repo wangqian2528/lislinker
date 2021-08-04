@@ -45,6 +45,7 @@ public:
     //[DIANO]
     static bool DIANOEnabled;               //配置使能
     static QString DIANOComPort;            //串口
+    static int DIANOComBaud;                //波特率
 
     //EDAN
     static bool EDANEnabled;                //配置使能

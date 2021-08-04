@@ -1,4 +1,5 @@
 ﻿#include "serialport.h"
+#include "config.h"
 
 SerialPort::SerialPort(QObject *parent) : QObject(parent)
 {
@@ -15,7 +16,7 @@ void SerialPort::comInit(const QString &portName)
         if (mSerialPort->open(QIODevice::ReadWrite))
         {
             /* 设置串口参数 */
-            mSerialPort->setBaudRate(QSerialPort::Baud9600);
+            mSerialPort->setBaudRate(Config::DIANOComBaud);
             mSerialPort->setDataBits(QSerialPort::Data8);
             mSerialPort->setParity(QSerialPort::NoParity);
             mSerialPort->setStopBits(QSerialPort::OneStop);

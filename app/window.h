@@ -62,6 +62,8 @@ private slots:
 
     void readUdpData();
 
+    void on_cbx_diano_baud_currentIndexChanged(const QString &arg1);
+
 private:
     Ui::Window *ui;
 
