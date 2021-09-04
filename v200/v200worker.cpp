@@ -21,7 +21,8 @@ const char ackDevOB[] = {0x10,0x02,0x00,0x06,0x6F,0x01,0x00,0x00,0x00,0x00,0x10,
 void V200Worker::parseData(const QByteArray &data)
 {
     QByteArray recv(data);
-    recv.remove(0, 12);
+    if(data.size() >= 50) recv.remove(0, 12);
+
     char *msg = recv.data();
 
     quint16 itemID = quint8(msg[27])<<8 | quint8(msg[28]);

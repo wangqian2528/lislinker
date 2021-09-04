@@ -17,7 +17,7 @@ void TcpWorker::socketInit(const QString &ip, int port)
 void TcpWorker::readReady()
 {
     mReceivedData += mTcpSocket->readAll();
-    mCountTimerID = startTimer(1000);
+    mCountTimerID = startTimer(2000);
 }
 
 const char rspCMD[] = {0x10,0x02,0x00,0x0B,0x6F,0x01,0x03,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x10,0x03};
