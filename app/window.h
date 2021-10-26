@@ -64,6 +64,12 @@ private slots:
 
     void on_cbx_diano_baud_currentIndexChanged(const QString &arg1);
 
+    void on_gb_h120_toggled(bool arg1);
+    void on_cbx_h120_activated(const QString &arg1);
+
+    void on_gb_mpoint_toggled(bool arg1);
+    void on_cbx_mpoint_activated(const QString &arg1);
+
 private:
     Ui::Window *ui;
 

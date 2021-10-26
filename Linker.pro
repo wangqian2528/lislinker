@@ -3,6 +3,8 @@ CONFIG  += ordered
 SUBDIRS += \
     diano \
     edan \
+    h120 \
+    mpoint \
     poch \
            update \
            app \

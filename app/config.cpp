@@ -49,6 +49,14 @@ int Config::DIANOComBaud = 9600;                 //波特率
 bool Config::EDANEnabled = false;                //配置使能
 int Config::EDANPort = 0;                        //端口号
 
+//MPOINT
+bool Config::MPointEnabled = false;              //配置使能
+QString Config::MPointComPort = "";              //串口
+
+//H120尿机
+bool Config::H120Enabled = false;                //配置使能
+QString Config::H120ComPort = "";                //串口
+
 bool Config::checkConfig()
 {
     //如果配置文件大小为0,则以初始值继续运行,并生成配置文件
@@ -133,6 +141,18 @@ void Config::readConfig()
     Config::EDANEnabled = set.value("Enabled", Config::EDANEnabled).toBool();
     Config::EDANPort = set.value("Port", Config::EDANPort).toInt();
     set.endGroup();
+
+    //[MPOINT]
+    set.beginGroup("MPOINT");
+    Config::MPointEnabled = set.value("Enabled", Config::MPointEnabled).toBool();
+    Config::MPointComPort = set.value("ComPort", Config::MPointComPort).toString();
+    set.endGroup();
+
+    //[H120]
+    set.beginGroup("H120");
+    Config::H120Enabled = set.value("Enabled", Config::H120Enabled).toBool();
+    Config::H120ComPort = set.value("ComPort", Config::H120ComPort).toString();
+    set.endGroup();
 }
 
 void Config::writeConfig()
@@ -200,5 +220,17 @@ void Config::writeConfig()
     set.beginGroup("EDAN");
     set.setValue("Enabled", Config::EDANEnabled);
     set.setValue("Port", Config::EDANPort);
+    set.endGroup();
+
+    //[MPOINT]
+    set.beginGroup("MPOINT");
+    set.setValue("Enabled", Config::MPointEnabled);
+    set.setValue("ComPort", Config::MPointComPort);
+    set.endGroup();
+
+    //[H120]
+    set.beginGroup("H120");
+    set.setValue("Enabled", Config::H120Enabled);
+    set.setValue("ComPort", Config::H120ComPort);
     set.endGroup();
 }

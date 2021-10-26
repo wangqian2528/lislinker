@@ -130,6 +130,8 @@ void Window::initDevicePage()
     ui->gb_pcr_mini8->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_diano->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_edan->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->gb_mpoint->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->gb_h120->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
 
     //idexx
     ui->gb_idexx->setChecked(Config::IdexxEnabled);
@@ -186,6 +188,20 @@ void Window::initDevicePage()
     ui->gb_edan->setChecked(Config::EDANEnabled);
     ui->le_edan_port->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->le_edan_port->setText(QString("%1").arg(Config::EDANPort));
+
+    //MPOINT
+    ui->gb_mpoint->setChecked(Config::MPointEnabled);
+    ui->cbx_mpoint->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->cbx_mpoint->addItems(getAllComPortName());
+    ui->cbx_mpoint->setCurrentIndex(ui->cbx_mpoint->findText(Config::MPointComPort));
+    ui->cbx_mpoint->installEventFilter(this);
+
+    //H120
+    ui->gb_h120->setChecked(Config::H120Enabled);
+    ui->cbx_h120->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->cbx_h120->addItems(getAllComPortName());
+    ui->cbx_h120->setCurrentIndex(ui->cbx_h120->findText(Config::H120ComPort));
+    ui->cbx_h120->installEventFilter(this);
 }
 
 bool Window::eventFilter(QObject *obj, QEvent *event)
@@ -220,6 +236,22 @@ bool Window::eventFilter(QObject *obj, QEvent *event)
         {
             ui->cbx_diano->clear();
             ui->cbx_diano->addItems(getAllComPortName());
+        }
+    }
+    else if(obj == ui->cbx_mpoint)
+    {
+        if(event->type() == QEvent::MouseButtonPress && ui->cbx_mpoint->isEnabled())
+        {
+            ui->cbx_mpoint->clear();
+            ui->cbx_mpoint->addItems(getAllComPortName());
+        }
+    }
+    else if(obj == ui->cbx_h120)
+    {
+        if(event->type() == QEvent::MouseButtonPress && ui->cbx_h120->isEnabled())
+        {
+            ui->cbx_h120->clear();
+            ui->cbx_h120->addItems(getAllComPortName());
         }
     }
     return QWidget::eventFilter(obj, event);
@@ -375,6 +407,26 @@ void Window::on_le_edan_port_textEdited(const QString &arg1)
     Config::EDANPort = arg1.toInt();
 }
 
+void Window::on_gb_h120_toggled(bool arg1)
+{
+    Config::H120Enabled = arg1;
+}
+
+void Window::on_cbx_h120_activated(const QString &arg1)
+{
+    Config::H120ComPort = arg1;
+}
+
+void Window::on_gb_mpoint_toggled(bool arg1)
+{
+    Config::MPointEnabled = arg1;
+}
+
+void Window::on_cbx_mpoint_activated(const QString &arg1)
+{
+    Config::MPointComPort = arg1;
+}
+
 static void startProcess(const QString &pName)
 {
     QProcess *p = new QProcess;
@@ -400,6 +452,8 @@ void Window::startAllPro()
     if(Config::Mini8Enabled) startProcess("mini8");
     if(Config::DIANOEnabled) startProcess("diano");
     if(Config::EDANEnabled) startProcess("edan");
+    if(Config::H120Enabled) startProcess("h120");
+    if(Config::MPointEnabled) startProcess("mpoint");
     ui->tb_log->clear();
 }
 
@@ -414,6 +468,8 @@ void Window::stopAllPro()
     if(Config::Mini8Enabled) killProcess("mini8");
     if(Config::DIANOEnabled) killProcess("diano");
     if(Config::EDANEnabled) killProcess("edan");
+    if(Config::H120Enabled) killProcess("h120");
+    if(Config::MPointEnabled) killProcess("mpoint");
     saveLog();
     ui->tb_log->setText(QStringLiteral("运行日志显示在这里"));
 }

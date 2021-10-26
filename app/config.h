@@ -51,6 +51,15 @@ public:
     static bool EDANEnabled;                //配置使能
     static int EDANPort;                    //端口号
 
+    //MPOINT
+    static bool MPointEnabled;              //配置使能
+    static QString MPointComPort;           //串口
+
+    //H120
+    static bool H120Enabled;                //配置使能
+    static QString H120ComPort;             //串口
+
+
     static void readConfig();               //读取配置文件,在main函数最开始加载程序载入
     static void writeConfig();              //写入配置文件,在更改配置文件程序关闭时调用
     static bool checkConfig();              //校验配置文件
