@@ -38,7 +38,7 @@ void TrayIcon::iconIsActived(QSystemTrayIcon::ActivationReason reason)
         break;
     case QSystemTrayIcon::DoubleClick:
     {
-        mainWidget->showNormal();
+//        mainWidget->showNormal();
         break;
     }
 
@@ -56,7 +56,7 @@ void TrayIcon::setMainWidget(QWidget *mainWidget)
 {
     this->mainWidget = mainWidget;
 
-    openAction = menu->addAction(QIcon(":/image/open.png"), QStringLiteral("主界面"), mainWidget, SLOT(showNormal()));
+//    openAction = menu->addAction(QIcon(":/image/open.png"), QStringLiteral("主界面"), mainWidget, SLOT(showNormal()));
     quitAction = menu->addAction(QIcon(":/image/quit.png"), QStringLiteral("退出"), this, SIGNAL(trayIconExit()));
 
     trayIcon->setContextMenu(menu);

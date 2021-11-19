@@ -30,6 +30,9 @@ protected:
     bool eventFilter(QObject *obj, QEvent *event) override;
 
 private slots:
+    void readUdpData();
+    void paraUdpData(QString &str);
+
     void on_cbx_auto_start_toggled(bool checked);
     void on_btn_start_clicked();
 
@@ -59,8 +62,6 @@ private slots:
 
     void on_gb_edan_toggled(bool arg1);
     void on_le_edan_port_textEdited(const QString &arg1);
-
-    void readUdpData();
 
     void on_cbx_diano_baud_currentIndexChanged(const QString &arg1);
 

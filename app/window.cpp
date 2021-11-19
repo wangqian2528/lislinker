@@ -9,8 +9,15 @@
 #include "qdatetime.h"
 #include "qudpsocket.h"
 
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonArray>
+
 #include "QtSerialPort/QSerialPortInfo"
 #include "QtSerialPort/QSerialPort"
+
+static void startProcess(const QString &pName);
+static void killProcess(const QString &pName);
 
 Window::Window(QWidget *parent)
     : QMainWindow(parent)
@@ -22,6 +29,8 @@ Window::Window(QWidget *parent)
     initConnectPage();
     initDevicePage();
     initAppPorcess();
+
+    startProcess("http");
 }
 
 Window::~Window()
@@ -34,6 +43,7 @@ void Window::appExit()
 {
     if(appStart) stopAllPro();
     Config::writeConfig();
+    killProcess("http");
     qApp->exit();
 }
 
@@ -443,7 +453,7 @@ static void killProcess(const QString &pName)
 
 void Window::startAllPro()
 {
-    startProcess("http");
+//    startProcess("http");
     if(Config::IdexxEnabled) startProcess("idexx");
     if(Config::BC2600Enabled) startProcess("bc2600");
     if(Config::V200Enabled) startProcess("v200");
@@ -459,7 +469,7 @@ void Window::startAllPro()
 
 void Window::stopAllPro()
 {
-    killProcess("http");
+//    killProcess("http");
     if(Config::IdexxEnabled) killProcess("idexx");
     if(Config::BC2600Enabled) killProcess("bc2600");
     if(Config::V200Enabled) killProcess("v200");
@@ -516,5 +526,22 @@ void Window::readUdpData()
         udpdata = QLatin1String(tempData);
     }
     while (udp->hasPendingDatagrams());
-    ui->tb_log->append(QString("[%1]:%2").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd_HH:mm:ss")).arg(udpdata));
+
+//    ui->tb_log->append(QString("[%1]:%2").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd_HH:mm:ss")).arg(udpdata));
+//    qInfo()<<udpdata;
+    paraUdpData(udpdata);
+}
+
+void Window::paraUdpData(QString &str)
+{
+    QJsonParseError err_rpt;
+    QJsonDocument root_Doc = QJsonDocument::fromJson(str.toLocal8Bit().data(), &err_rpt);
+    if(err_rpt.error != QJsonParseError::NoError)
+    {
+        return;
+    }
+
+    QJsonObject root_Obj = root_Doc.object();
+
+
 }

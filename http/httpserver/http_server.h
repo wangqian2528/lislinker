@@ -23,6 +23,8 @@ public:
     void AddHandler(const std::string &url, ReqHandler req_handler);
     void RemoveHandler(const std::string &url);
     static std::unordered_map<std::string, ReqHandler> s_handler_map;
+    static std::string s_web_dir; // 网页根目录
+    static mg_serve_http_opts s_server_option; // web服务器选项
 
 public slots:
     bool Start();

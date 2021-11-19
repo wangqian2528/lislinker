@@ -4,7 +4,11 @@
 
 void HttpServer::Init(const std::string &port)
 {
+    //s_server_option.enable_directory_listing = "yes";
+    s_server_option.document_root = s_web_dir.c_str();
 	m_port = port;
+
+    s_server_option.extra_headers = "Access-Control-Allow-Origin: *";
 }
 
 bool HttpServer::Start()
@@ -109,25 +113,28 @@ void HttpServer::HandleHttpEvent(mg_connection *connection, http_message *http_r
 	}
 
 	// 其他请求
+
 	if (method_check(http_req, "OPTIONS"))
 	{
 		SendHttpRsp(connection, "OK");
 		return;
 	}
 
-	if (route_check(http_req, "/api/test")) 
-	{
-		// 直接回传
-		SendHttpRsp(connection, "OK");
-	}
-	else
-	{
-		mg_printf(
-			connection,
-			"%s",
-			"HTTP/1.1 501 Not Implemented\r\n" 
-			"Content-Length: 0\r\n\r\n");
-	}
+    if (route_check(http_req, "/")) // index page
+        mg_serve_http(connection, http_req, s_server_option);
+    else if (route_check(http_req, "/api/test"))
+    {
+        // 直接回传
+        SendHttpRsp(connection, "OK");
+    }
+    else
+    {
+        mg_printf(
+                    connection,
+                    "%s",
+                    "HTTP/1.1 501 Not Implemented\r\n"
+                    "Content-Length: 0\r\n\r\n");
+    }
 }
 
 bool HttpServer::Close()

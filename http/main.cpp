@@ -20,6 +20,8 @@
 #define LOG_PRINT(a) Log::Instance()->sendLog(a);
 
 std::unordered_map<std::string, ReqHandler> HttpServer::s_handler_map;
+std::string HttpServer::s_web_dir = "./web";
+mg_serve_http_opts HttpServer::s_server_option;
 
 bool handle_ResultIndex(std::string url, std::string body, mg_connection *c, OnRspCallback rsp_callback)
 {

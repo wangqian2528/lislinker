@@ -56,34 +56,39 @@ void Widget::showUpdatePorgress(int val, int maxVal)
 
 void Widget::showUpdateChoose(const QString &ver, const QString &date, const QString &note)
 {
-    int ret = QMessageBox::information(this,
-                                       QStringLiteral("是否升级"),
-                                       QStringLiteral(" 版本号：%1\n\r发布日期：%2\n\r更新内容：%3\n\r").arg(ver).arg(date).arg(note),
-                                       QMessageBox::Ok | QMessageBox::Cancel,
-                                       QMessageBox::Ok);
-    switch(ret)
-    {
-    case QMessageBox::Ok:
-        showUpdateInfo(QStringLiteral("升级中"));
-        emit sendStartDownload();
-        break;
-    case QMessageBox::Cancel:
-        exitUpdate();
-        break;
-    }
+    Q_UNUSED(ver);
+    Q_UNUSED(date);
+    Q_UNUSED(note);
+//    int ret = QMessageBox::information(this,
+//                                       QStringLiteral("是否升级"),
+//                                       QStringLiteral(" 版本号：%1\n\r发布日期：%2\n\r更新内容：%3\n\r").arg(ver).arg(date).arg(note),
+//                                       QMessageBox::Ok | QMessageBox::Cancel,
+//                                       QMessageBox::Ok);
+//    switch(ret)
+//    {
+//    case QMessageBox::Ok:
+//        showUpdateInfo(QStringLiteral("升级中"));
+//        emit sendStartDownload();
+//        break;
+//    case QMessageBox::Cancel:
+//        exitUpdate();
+//        break;
+//    }
+    emit sendStartDownload();
 }
 
 void Widget::showUpdateResult(bool ret)
 {
+    Q_UNUSED(ret);
     showUpdateInfo(QStringLiteral("升级结束"));
-    if(ret)
-    {
-        QMessageBox::information(this, QStringLiteral("升级完成"), QStringLiteral("升级成功"));
-    }
-    else
-    {
-        QMessageBox::information(this, QStringLiteral("升级完成"), QStringLiteral("升级失败"));
-    }
+//    if(ret)
+//    {
+//        QMessageBox::information(this, QStringLiteral("升级完成"), QStringLiteral("升级成功"));
+//    }
+//    else
+//    {
+//        QMessageBox::information(this, QStringLiteral("升级完成"), QStringLiteral("升级失败"));
+//    }
     exitUpdate();
 }
 
