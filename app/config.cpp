@@ -7,55 +7,55 @@
 QString Config::ConfigFile = "config.ini";
 
 //[APP]
-bool Config::AppAutoStart = false;              //自启动选项
-int Config::AppListenPort = 7790;               //监听端口号
+bool Config::AppAutoStart = false; //自启动选项
+int Config::AppListenPort = 7790;  //监听端口号
 
 //[HTTP]
-int Config::HttpPort = 7788;                    //http端口号
+int Config::HttpPort = 7788; //http端口号
 
 //[IDEXX]
-bool Config::IdexxEnabled = false;              //配置使能
-QString Config::IdexxRequestFolder = "";        //工单保存路径
-QString Config::IdexxResultFolder = "";         //报告保存路径
+bool Config::IdexxEnabled = false;                                      //配置使能
+QString Config::IdexxRequestFolder = "D:/IDEXX Interlink/Requests/";    //工单保存路径
+QString Config::IdexxResultFolder = "D:/IDEXX Interlink/Results/Data/"; //报告保存路径
 
 //[BC2600]
-bool Config::BC2600Enabled = false;             //配置使能
-QString Config::BC2600ComPort = "";             //串口号
+bool Config::BC2600Enabled = false; //配置使能
+QString Config::BC2600ComPort = ""; //串口号
 
 //[Mini8]
-bool Config::Mini8Enabled = false;              //配置使能
-QString Config::Mini8RequestFolder = "";        //工单保存路径
-QString Config::Mini8ResultFolder = "";         //报告保存路径
+bool Config::Mini8Enabled = false;       //配置使能
+QString Config::Mini8RequestFolder = ""; //工单保存路径
+QString Config::Mini8ResultFolder = "";  //报告保存路径
 
 //[V200]
-bool Config::V200Enabled = false;               //配置使能
-QString Config::V200IP = "";                    //IP地址
-int Config::V200Port = 0;                       //端口号
+bool Config::V200Enabled = false; //配置使能
+QString Config::V200IP = "";      //IP地址
+int Config::V200Port = 0;         //端口号
 
 //[VB1]
-bool Config::VB1Enabled = false;                //配置使能
-QString Config::VB1ComPort = "";                //串口号
+bool Config::VB1Enabled = false; //配置使能
+QString Config::VB1ComPort = ""; //串口号
 
 //[pocH]
-bool Config::POCHEnabled = false;               //配置使能
-QString Config::POCHComPort = "";               //串口号
+bool Config::POCHEnabled = false; //配置使能
+QString Config::POCHComPort = ""; //串口号
 
 //[DIANO]
-bool Config::DIANOEnabled = false;               //配置使能
-QString Config::DIANOComPort = "";               //串口号
-int Config::DIANOComBaud = 9600;                 //波特率
+bool Config::DIANOEnabled = false; //配置使能
+QString Config::DIANOComPort = ""; //串口号
+int Config::DIANOComBaud = 9600;   //波特率
 
 //[EDAN]
-bool Config::EDANEnabled = false;                //配置使能
-int Config::EDANPort = 0;                        //端口号
+bool Config::EDANEnabled = false; //配置使能
+int Config::EDANPort = 0;         //端口号
 
 //MPOINT
-bool Config::MPointEnabled = false;              //配置使能
-QString Config::MPointComPort = "";              //串口
+bool Config::MPointEnabled = false; //配置使能
+QString Config::MPointComPort = ""; //串口
 
 //H120尿机
-bool Config::H120Enabled = false;                //配置使能
-QString Config::H120ComPort = "";                //串口
+bool Config::H120Enabled = false; //配置使能
+QString Config::H120ComPort = ""; //串口
 
 bool Config::checkConfig()
 {
@@ -63,7 +63,7 @@ bool Config::checkConfig()
     QFile file(Config::ConfigFile);
     if (file.size() == 0)
     {
-        qDebug()<< "no config file, now creat!";
+        qDebug() << "no config file, now creat!";
         writeConfig();
         return false;
     }

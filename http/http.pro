@@ -1,4 +1,4 @@
-QT      += core network
+QT      += core network serialport
 CONFIG  += c++11
 DEFINES += QT_DEPRECATED_WARNINGS
 

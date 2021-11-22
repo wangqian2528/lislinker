@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     Window w;
     w.setWindowTitle("LIS Linker");
     w.setWindowIcon(QIcon(":/image/hb_off.png"));
-    w.show();
+//    w.show();
 
     TrayIcon::Instance()->setMainWidget(&w);
     TrayIcon::Instance()->setIcon(w.windowIcon());

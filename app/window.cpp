@@ -510,7 +510,7 @@ void Window::initAppPorcess()
 
     if(Config::AppAutoStart)
     {
-        on_btn_start_clicked();
+//        on_btn_start_clicked();
         setWindowIcon(QIcon(":/image/hb_on.png"));
     }
 }
