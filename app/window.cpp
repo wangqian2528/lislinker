@@ -132,6 +132,7 @@ void Window::initDevicePage()
     ui->gb_edan->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_mpoint->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_h120->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->gb_hbfa->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
 
     //idexx
     ui->gb_idexx->setChecked(Config::IdexxEnabled);
@@ -202,6 +203,13 @@ void Window::initDevicePage()
     ui->cbx_h120->addItems(getAllComPortName());
     ui->cbx_h120->setCurrentIndex(ui->cbx_h120->findText(Config::H120ComPort));
     ui->cbx_h120->installEventFilter(this);
+
+    //HBFA
+    ui->gb_hbfa->setChecked(Config::HBFAEnabled);
+    ui->le_hbfa_ip->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->le_hbfa_port->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->le_hbfa_ip->setText(Config::HBFAIP);
+    ui->le_hbfa_port->setText(QString("%1").arg(Config::HBFAPort));
 }
 
 bool Window::eventFilter(QObject *obj, QEvent *event)
@@ -372,6 +380,21 @@ void Window::on_le_v200_port_textEdited(const QString &arg1)
     Config::V200Port = arg1.toInt();
 }
 
+void Window::on_gb_hbfa_toggled(bool arg1)
+{
+    Config::HBFAEnabled = arg1;
+}
+
+void Window::on_le_hbfa_ip_textEdited(const QString &arg1)
+{
+    Config::HBFAIP = arg1;
+}
+
+void Window::on_le_hbfa_port_textEdited(const QString &arg1)
+{
+    Config::HBFAPort = arg1.toInt();
+}
+
 void Window::on_gb_vb1_toggled(bool arg1)
 {
     Config::VB1Enabled = arg1;
@@ -454,6 +477,7 @@ void Window::startAllPro()
     if(Config::EDANEnabled) startProcess("edan");
     if(Config::H120Enabled) startProcess("h120");
     if(Config::MPointEnabled) startProcess("mpoint");
+    if(Config::HBFAEnabled) startProcess("hbfa");
     ui->tb_log->clear();
 }
 
@@ -470,6 +494,7 @@ void Window::stopAllPro()
     if(Config::EDANEnabled) killProcess("edan");
     if(Config::H120Enabled) killProcess("h120");
     if(Config::MPointEnabled) killProcess("mpoint");
+    if(Config::HBFAEnabled) killProcess("hbfa");
     saveLog();
     ui->tb_log->setText(QStringLiteral("运行日志显示在这里"));
 }

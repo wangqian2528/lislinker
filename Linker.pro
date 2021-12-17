@@ -4,6 +4,7 @@ SUBDIRS += \
     diano \
     edan \
     h120 \
+    hbfa \
     mpoint \
     poch \
            update \

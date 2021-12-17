@@ -57,6 +57,11 @@ QString Config::MPointComPort = "";              //串口
 bool Config::H120Enabled = false;                //配置使能
 QString Config::H120ComPort = "";                //串口
 
+//[HBFA]
+bool Config::HBFAEnabled = false;               //配置使能
+QString Config::HBFAIP = "";                    //IP地址
+int Config::HBFAPort = 0;                       //端口号
+
 bool Config::checkConfig()
 {
     //如果配置文件大小为0,则以初始值继续运行,并生成配置文件
@@ -153,6 +158,13 @@ void Config::readConfig()
     Config::H120Enabled = set.value("Enabled", Config::H120Enabled).toBool();
     Config::H120ComPort = set.value("ComPort", Config::H120ComPort).toString();
     set.endGroup();
+
+    //[HBFA]
+    set.beginGroup("HBFA");
+    Config::HBFAEnabled = set.value("Enabled", Config::HBFAEnabled).toBool();
+    Config::HBFAIP = set.value("IP", Config::HBFAIP).toString();
+    Config::HBFAPort = set.value("Port", Config::HBFAPort).toInt();
+    set.endGroup();
 }
 
 void Config::writeConfig()
@@ -232,5 +244,12 @@ void Config::writeConfig()
     set.beginGroup("H120");
     set.setValue("Enabled", Config::H120Enabled);
     set.setValue("ComPort", Config::H120ComPort);
+    set.endGroup();
+
+    //[HBFA]
+    set.beginGroup("HBFA");
+    set.setValue("Enabled", Config::HBFAEnabled);
+    set.setValue("IP", Config::HBFAIP);
+    set.setValue("Port", Config::HBFAPort);
     set.endGroup();
 }

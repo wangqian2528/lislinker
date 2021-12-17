@@ -70,6 +70,10 @@ private slots:
     void on_gb_mpoint_toggled(bool arg1);
     void on_cbx_mpoint_activated(const QString &arg1);
 
+    void on_gb_hbfa_toggled(bool arg1);
+    void on_le_hbfa_ip_textEdited(const QString &arg1);
+    void on_le_hbfa_port_textEdited(const QString &arg1);
+
 private:
     Ui::Window *ui;
 

@@ -27,7 +27,7 @@ bool handle_ResultIndex(std::string url, std::string body, mg_connection *c, OnR
 
     QStringList devList;
 
-    devList<<"IDEXX"<<"BC2600"<<"V200"<<"VB1"<<"MINI8"<<"POCH"<<"EDAN"<<"DIANO"<<"MPOINT"<<"H120";
+    devList<<"IDEXX"<<"BC2600"<<"V200"<<"VB1"<<"MINI8"<<"POCH"<<"EDAN"<<"DIANO"<<"MPOINT"<<"H120"<<"HBFA";
 
     QJsonObject root_Obj;
 
