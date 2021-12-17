@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    QSharedMemory mem("LISLinker");
+    QSharedMemory mem("LinkerBox");
     if (!mem.create(1))
     {
         return 0;
@@ -26,16 +26,14 @@ int main(int argc, char *argv[])
     Config::readConfig();
 
     Window w;
-    w.setWindowTitle("LIS Linker");
-    w.setWindowIcon(QIcon(":/image/hb_off.png"));
-//    w.show();
+    w.setWindowTitle("LinkerBox");
 
     TrayIcon::Instance()->setMainWidget(&w);
-    TrayIcon::Instance()->setIcon(w.windowIcon());
-    TrayIcon::Instance()->setToolTip(w.windowTitle());
+    TrayIcon::Instance()->setIcon(QIcon(":/image/hb_on.png"));
+    TrayIcon::Instance()->setToolTip("LinkerBox");
     TrayIcon::Instance()->setVisible(true);
+
     QObject::connect(TrayIcon::Instance(), SIGNAL(trayIconExit()), &w, SLOT(appExit()));
-    QObject::connect(&w, SIGNAL(windowIconChanged(QIcon)), TrayIcon::Instance(), SLOT(setIcon(QIcon)));
 
     return a.exec();
 }
