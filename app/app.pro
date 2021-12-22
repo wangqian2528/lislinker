@@ -4,7 +4,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 TEMPLATE = app
 
-RC_ICONS = app.ico
+RC_ICONS = box.ico
 
 TARGET   = ../../output/app
 
@@ -22,7 +22,6 @@ HEADERS += \
 FORMS +=
 
 RESOURCES += \
-    app.qrc \
-    qss.qrc
+    app.qrc
 
 

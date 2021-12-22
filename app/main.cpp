@@ -6,6 +6,7 @@
 #include <QApplication>
 #include <QTextCodec>
 #include <QTimer>
+#include <QProcess>
 
 int main(int argc, char *argv[])
 {
@@ -34,6 +35,10 @@ int main(int argc, char *argv[])
     TrayIcon::Instance()->setVisible(true);
 
     QObject::connect(TrayIcon::Instance(), SIGNAL(trayIconExit()), &w, SLOT(appExit()));
+
+    QProcess p;
+    p.setWorkingDirectory(qApp->applicationDirPath() + "/web");
+    p.start(qApp->applicationDirPath() + "/web/start.bat");
 
     return a.exec();
 }
