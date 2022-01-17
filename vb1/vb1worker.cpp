@@ -42,10 +42,11 @@ void VB1Worker::parseData(const QByteArray &data)
     for(int i = result_index; i < list.size(); i++)
     {
         QStringList resList = QString(list.at(i)).split(QRegExp("\\s{2,}"));
-        if(resList.size() < 4)
+        for(int i = resList.size(); i < 4; i++)
         {
             resList.append(QString(" "));
         }
+
         qDebug()<<resList;
         jsonInsert(result_arry, resList.at(0), resList.at(1), resList.at(2), resList.at(3));
     }
@@ -80,7 +81,16 @@ void VB1Worker::jsonInsert(QJsonArray &arr, const QString &key, const QString &v
     tmpObj["title"] = key;
     tmpObj["value"] = value;
     tmpObj["unit"] = unit;
-    tmpObj["min"] = QString(strList.at(0));
-    tmpObj["max"] = QString(strList.at(1));
+
+    if(strList.size() == 2)
+    {
+        tmpObj["min"] = QString(strList.at(0));
+        tmpObj["max"] = QString(strList.at(1));
+    }
+    else
+    {
+        tmpObj["min"] = "";
+        tmpObj["max"] = "";
+    }
     arr.append(tmpObj);
 }
