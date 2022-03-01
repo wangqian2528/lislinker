@@ -40,6 +40,10 @@ private slots:
     void on_gb_bc2600_toggled(bool arg1);
     void on_cbx_bc2600_activated(const QString &arg1);
 
+    void on_gb_bc5000_toggled(bool arg1);
+    void on_le_bc5000_ip_textEdited(const QString &arg1);
+    void on_le_bc5000_port_textEdited(const QString &arg1);
+
     void on_gb_pcr_mini8_toggled(bool arg1);
     void on_btn_mini8_request_clicked();
     void on_btn_mini8_result_clicked();

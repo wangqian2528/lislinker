@@ -22,6 +22,11 @@ QString Config::IdexxResultFolder = "";         //报告保存路径
 bool Config::BC2600Enabled = false;             //配置使能
 QString Config::BC2600ComPort = "";             //串口号
 
+//[BC5000]
+bool Config::BC5000Enabled = false;             //配置使能
+QString Config::BC5000IP = "";                  //IP地址
+int Config::BC5000Port = 0;                     //端口号
+
 //[Mini8]
 bool Config::Mini8Enabled = false;              //配置使能
 QString Config::Mini8RequestFolder = "";        //工单保存路径
@@ -106,6 +111,13 @@ void Config::readConfig()
     set.beginGroup("BC2600");
     Config::BC2600Enabled = set.value("Enabled", Config::BC2600Enabled).toBool();
     Config::BC2600ComPort = set.value("ComPort", Config::BC2600ComPort).toString();
+    set.endGroup();
+
+    //[BC5000]
+    set.beginGroup("BC5000");
+    Config::BC5000Enabled = set.value("Enabled", Config::BC5000Enabled).toBool();
+    Config::BC5000IP = set.value("IP", Config::BC5000IP).toString();
+    Config::BC5000Port = set.value("Port", Config::BC5000Port).toInt();
     set.endGroup();
 
     //[Mini8]
@@ -193,6 +205,13 @@ void Config::writeConfig()
     set.beginGroup("BC2600");
     set.setValue("Enabled", Config::BC2600Enabled);
     set.setValue("ComPort", Config::BC2600ComPort);
+    set.endGroup();
+
+    //[BC5000]
+    set.beginGroup("BC5000");
+    set.setValue("Enabled", Config::BC5000Enabled);
+    set.setValue("IP", Config::BC5000IP);
+    set.setValue("Port", Config::BC5000Port);
     set.endGroup();
 
     //[Mini8]

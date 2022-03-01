@@ -124,6 +124,7 @@ void Window::initDevicePage()
     //group box 字体
     ui->gb_idexx->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_bc2600->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->gb_bc5000->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_V200->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_vb1->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->gb_poch->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
@@ -147,6 +148,13 @@ void Window::initDevicePage()
     ui->cbx_bc2600->addItems(getAllComPortName());
     ui->cbx_bc2600->setCurrentIndex(ui->cbx_bc2600->findText(Config::BC2600ComPort));
     ui->cbx_bc2600->installEventFilter(this);
+
+    //bc5000
+    ui->gb_bc5000->setChecked(Config::BC5000Enabled);
+    ui->le_bc5000_ip->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->le_bc5000_port->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
+    ui->le_bc5000_ip->setText(Config::BC5000IP);
+    ui->le_bc5000_port->setText(QString("%1").arg(Config::BC5000Port));
 
     //mini8
     ui->gb_pcr_mini8->setChecked(Config::Mini8Enabled);
@@ -330,6 +338,21 @@ void Window::on_cbx_bc2600_activated(const QString &arg1)
     Config::BC2600ComPort = arg1;
 }
 
+void Window::on_gb_bc5000_toggled(bool arg1)
+{
+    Config::BC5000Enabled = arg1;
+}
+
+void Window::on_le_bc5000_ip_textEdited(const QString &arg1)
+{
+    Config::BC5000IP = arg1;
+}
+
+void Window::on_le_bc5000_port_textEdited(const QString &arg1)
+{
+    Config::BC5000Port = arg1.toInt();
+}
+
 void Window::on_gb_pcr_mini8_toggled(bool arg1)
 {
     Config::Mini8Enabled = arg1;
@@ -469,6 +492,7 @@ void Window::startAllPro()
     startProcess("http");
     if(Config::IdexxEnabled) startProcess("idexx");
     if(Config::BC2600Enabled) startProcess("bc2600");
+    if(Config::BC5000Enabled) startProcess("bc5000");
     if(Config::V200Enabled) startProcess("v200");
     if(Config::VB1Enabled) startProcess("vb1");
     if(Config::POCHEnabled) startProcess("poch");
@@ -486,6 +510,7 @@ void Window::stopAllPro()
     killProcess("http");
     if(Config::IdexxEnabled) killProcess("idexx");
     if(Config::BC2600Enabled) killProcess("bc2600");
+    if(Config::BC5000Enabled) killProcess("bc5000");
     if(Config::V200Enabled) killProcess("v200");
     if(Config::VB1Enabled) killProcess("vb1");
     if(Config::POCHEnabled) killProcess("poch");

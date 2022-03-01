@@ -24,6 +24,11 @@ public:
     static bool BC2600Enabled;              //配置使能
     static QString BC2600ComPort;           //串口号
 
+    //[BC5000]
+    static bool BC5000Enabled;                //配置使能
+    static QString BC5000IP;                  //IP地址
+    static int BC5000Port;                    //端口号
+
     //[Mini8]
     static bool Mini8Enabled;               //配置使能
     static QString Mini8RequestFolder;      //工单保存路径

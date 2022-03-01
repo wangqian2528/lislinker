@@ -1,6 +1,7 @@
 TEMPLATE = subdirs
 CONFIG  += ordered
 SUBDIRS += \
+    bc5000 \
     diano \
     edan \
     h120 \
