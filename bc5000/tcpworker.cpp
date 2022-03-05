@@ -12,6 +12,10 @@ void TcpWorker::socketInit(const QString &ip, int port)
 
     connect(mTcpSocket.get(), static_cast<void(QAbstractSocket::*)(QAbstractSocket::SocketError)>(&QAbstractSocket::error), this, &TcpWorker::readError);
     connect(mTcpSocket.get(), &QTcpSocket::readyRead, this, &TcpWorker::readReady);
+    connect(mTcpSocket.get(), &QTcpSocket::disconnected, this, &TcpWorker::disco);
+
+    aimIP = ip;
+    aimPort = port;
 
     mTcpSocket->connectToHost(ip, port);
     if (mTcpSocket->waitForConnected(1000))
@@ -37,4 +41,9 @@ void TcpWorker::readError(QAbstractSocket::SocketError error)
 //    Q_UNUSED(error)
     qInfo()<<"connect error"<<error;
     mTcpSocket->disconnectFromHost();
+}
+
+void TcpWorker::disco()
+{
+    mTcpSocket->connectToHost(aimIP, aimPort);
 }

@@ -31,6 +31,7 @@ protected:
 
 private slots:
     void readReady();
+    void disco();
 
 private:
     bool lookForHeadTail();
@@ -39,6 +40,9 @@ private:
     unique_ptr<QTcpSocket> mTcpSocket = nullptr;
     QByteArray mReceivedData;
     int mCountTimerID = 0;
+
+    QString aimIP;
+    int aimPort;
 };
 
 #endif // TCPWORKER_H

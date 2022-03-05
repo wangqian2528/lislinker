@@ -167,7 +167,7 @@ void Window::initDevicePage()
     ui->gb_poch->setChecked(Config::POCHEnabled);
     ui->cbx_poch->setFont(QFont("Microsoft Yahei", 11, QFont::Bold));
     ui->cbx_poch->addItems(getAllComPortName());
-    ui->cbx_poch->setCurrentIndex(ui->cbx_vb1->findText(Config::POCHComPort));
+    ui->cbx_poch->setCurrentIndex(ui->cbx_poch->findText(Config::POCHComPort));
     ui->cbx_poch->installEventFilter(this);
 
     //v200

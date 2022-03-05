@@ -9,9 +9,20 @@ void TcpWorker::socketInit(const QString &ip, int port)
 {
     mTcpSocket.reset(new QTcpSocket);
     mTcpSocket->abort();
+
+    aimIP = ip;
+    aimPort = port;
+
+    connect(mTcpSocket.get(), &QTcpSocket::readyRead, this, &TcpWorker::readReady);
+    connect(mTcpSocket.get(), &QTcpSocket::disconnected, this, &TcpWorker::disco);
+
     mTcpSocket->connectToHost(ip, port, QAbstractSocket::ReadWrite, QAbstractSocket::IPv4Protocol);
     mTcpSocket->setProxy(QNetworkProxy::NoProxy);
-    connect(mTcpSocket.get(), &QTcpSocket::readyRead, this, &TcpWorker::readReady);
+}
+
+void TcpWorker::disco()
+{
+    mTcpSocket->connectToHost(aimIP, aimPort);
 }
 
 void TcpWorker::readReady()

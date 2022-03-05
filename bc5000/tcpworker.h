@@ -29,9 +29,12 @@ signals:
 private slots:
     void readReady();
     void readError(QAbstractSocket::SocketError error);
+    void disco();
 
 private:
     unique_ptr<QTcpSocket> mTcpSocket = nullptr;
+    QString aimIP;
+    int aimPort;
 };
 
 #endif // TCPWORKER_H
