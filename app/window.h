@@ -64,8 +64,6 @@ private slots:
     void on_gb_edan_toggled(bool arg1);
     void on_le_edan_port_textEdited(const QString &arg1);
 
-    void readUdpData();
-
     void on_cbx_diano_baud_currentIndexChanged(const QString &arg1);
 
     void on_gb_h120_toggled(bool arg1);
@@ -92,6 +90,5 @@ private:
 
     void startAllPro();
     void stopAllPro();
-    void saveLog();
 };
 #endif // WINDOW_H

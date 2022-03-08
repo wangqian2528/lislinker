@@ -502,7 +502,6 @@ void Window::startAllPro()
     if(Config::H120Enabled) startProcess("h120");
     if(Config::MPointEnabled) startProcess("mpoint");
     if(Config::HBFAEnabled) startProcess("hbfa");
-    ui->tb_log->clear();
 }
 
 void Window::stopAllPro()
@@ -520,51 +519,16 @@ void Window::stopAllPro()
     if(Config::H120Enabled) killProcess("h120");
     if(Config::MPointEnabled) killProcess("mpoint");
     if(Config::HBFAEnabled) killProcess("hbfa");
-    saveLog();
-    ui->tb_log->setText(QStringLiteral("运行日志显示在这里"));
-}
-
-void Window::saveLog()
-{
-    QString strDir = QString("%1/log").arg(qApp->applicationDirPath());
-    QDir dir(strDir);
-    if(!dir.exists())
-    {
-        dir.mkpath(strDir);
-    }
-
-    QFile file(this);
-    QString fileName = QString("%1/log/%2.log").arg(qApp->applicationDirPath()).arg(QDateTime::currentDateTime().toString("yyyy-MM-dd_HH_mm_ss"));
-    file.setFileName(fileName);
-    file.open(QIODevice::WriteOnly | QIODevice::Append | QFile::Text);
-    QTextStream logStream(&file);
-    logStream << ui->tb_log->toPlainText() << "\n";
-    file.close();
 }
 
 void Window::initAppPorcess()
 {
     udp = new QUdpSocket(this);
     udp->bind(Config::AppListenPort);
-    connect(udp, SIGNAL(readyRead()), this, SLOT(readUdpData()));
 
     if(Config::AppAutoStart)
     {
         on_btn_start_clicked();
         setWindowIcon(QIcon(":/image/hb_on.png"));
     }
-}
-
-void Window::readUdpData()
-{
-    QByteArray tempData;
-    QString udpdata;
-    do
-    {
-        tempData.resize(udp->pendingDatagramSize());
-        udp->readDatagram(tempData.data(), tempData.size());
-        udpdata = QLatin1String(tempData);
-    }
-    while (udp->hasPendingDatagrams());
-    ui->tb_log->append(QString("[%1]:%2").arg(QDateTime::currentDateTime().toString("yyyy-MM-dd_HH:mm:ss")).arg(udpdata));
 }
